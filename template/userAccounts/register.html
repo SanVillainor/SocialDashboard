@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {% if error %}
+    {{error}}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Unique Account code</label>
+        <input type="text" name="username" id="username" required><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required><br>
+        <label for="cpassword">Confirm Password</label>
+        <input type="password" name="cpassword" id="cpassword" required><br>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'login' %}">Login</a>
+</body>
+</html>

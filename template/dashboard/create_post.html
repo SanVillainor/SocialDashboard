@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" required><br>
+        <label for="content">Post content</label>
+        <input type="text" name="content" id="content" required><br>
+        <label for="opdatetime">(Optional) Schedule Post (leave empty for current time):</label>
+        <input type="datetime-local" id="opdatetime" name="opdatetime"><br>
+        <label for="opimage">Optional Image:</label>
+        <input type="file" id="opimage" name="opimage"><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+<script>
+    var now = new Date();
+    var currentYear = now.getFullYear();
+    var currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
+    var currentDay = now.getDate().toString().padStart(2, '0');
+    var currentHours = now.getHours().toString().padStart(2, '0');
+    var currentMinutes = now.getMinutes().toString().padStart(2, '0');
+    // with this only datetime after current or current can be chosen
+    var currentDatetime = `${currentYear}-${currentMonth}-${currentDay}T${currentHours}:${currentMinutes}`;
+    document.getElementById("opdatetime").min = currentDatetime;
+</script>
+</html>

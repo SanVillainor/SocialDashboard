@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th>SR No.</th>
+            <th>Title</th>
+            <th>Post content</th>
+            <th>likes</th>
+            <th>Comments</th>
+        </tr>
+        {% for key, value in data.items %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ value.title }}</td>
+            <td>{{ value.content }}</td>
+            <td>{{ value.likes }}</td>
+            <td><a href="{% url 'comments' id=key %}">view</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <a href="{% url 'createpost' %}"><button>Create Post</button></a>
+</body>
+<script>
+    // messages hiden after 5seconds
+    setTimeout(function() {
+        document.querySelectorAll('.messages').forEach(function(el) {
+            el.style.display = 'none';
+        });
+    }, 5000);
+</script>
+</html>
